@@ -61,3 +61,20 @@ func init() {
   // Load templates
   templates = template.Must(template.ParseGlob("templates/*.html"))
 }
+
+func main() {
+  // Static files
+  http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
+
+  // Routes
+  http.HandleFunc("/", listFormsHandler)
+  http.HandleFunc("/forms/new", newFormHandler)
+  http.HandleFunc("/forms/create", createFormHandler)
+  http.HandleFunc("/forms/view/", viewFormHandler)
+  http.HandleFunc("/forms/submit/", submitFormHandler)
+
+  log.Println("Server starting on :8080")
+  log.Fatal(http.ListenAndServe(":8080", nil))
+}
+
+
