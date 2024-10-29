@@ -112,12 +112,19 @@ func createFormHandler(w http.ResponseWriter, r *http.Request){
       FormID: form.ID,
       Label: labels[i],
       FieldType: types[i],
-      Required: contains(required, string(rune(i+'0')))
+      Required: contains(required, string(rune(i+'0'))),
     }
     db.Create(&field)
   }
 
   http.Redirect(w, r, "/", http.StatusSeeOther)
+}
+
+func viewFormHandler(w http.ResponseWriter, r *http.Request){
+  id := r.URL.Path[len("/forms/view/"):]
+  var form Form
+  db.Preload("Fields").First(&form, id)
+  templates.ExecuteTemplate(w, "view.html", form)
 }
 
 
