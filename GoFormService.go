@@ -41,3 +41,23 @@ type FormFieldValue struct {
   FormFieldID uint
   Value string
 }
+
+var (
+  db *gorm.DB
+  templates *template.Template
+)
+
+func init() {
+  // Initialize database
+  var err error
+  db, err = gorm.Open(sqlite.Open("forms.db"), &gorm.Config{})
+  if err != nil {
+    log.Fatal(err)
+  }
+
+  // Auto migrate the schema
+  db.AutoMigrate(&Form{}, &FormField{}, &FormSubmission{}, &FormFieldValue{})
+
+  // Load templates
+  templates = template.Must(template.ParseGlob("templates/*.html"))
+}
