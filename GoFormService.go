@@ -142,5 +142,20 @@ func submitFormHandler(w http.ResponseWriter, r *http.Request){
   }
   db.Create(&submission)
 
+  r.ParseForm()
+  var fields []FormField
+  db.Where("form_id = ?", form.ID).Find(&fields)
 
+  for _, field := range fields {
+    value := FormFieldValue {
+      FormSubmissionID: submission.ID,
+      FormFieldID: field.ID,
+      Value: r.FormValue(field.Label),
+    }
+    db.Create(&value)
+  }
+
+  http.Redirect(w, r, "/", http.StatusSeeOther)
 }
+
+
