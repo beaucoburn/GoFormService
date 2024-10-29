@@ -102,5 +102,22 @@ func createFormHandler(w http.ResponseWriter, r *http.Request){
 
   db.Create(&form)
 
+  // Create fields
+  labels := r.Form["field_label"]
+  types := r.Form["field_type"]
+  required := r.Form["field_required"]
 
+  for i := range labels {
+    field := FormField{
+      FormID: form.ID,
+      Label: labels[i],
+      FieldType: types[i],
+      Required: contains(required, string(rune(i+'0')))
+    }
+    db.Create(&field)
+  }
+
+  http.Redirect(w, r, "/", http.StatusSeeOther)
 }
+
+
