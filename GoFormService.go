@@ -88,4 +88,19 @@ func newFormHandler(w http.ResponseWriter, r *http.Request){
   templates.ExecuteTemplate(w, "new.html", nil)
 }
 
+func createFormHandler(w http.ResponseWriter, r *http.Request){
+  if r.Method != http.MethodPost {
+    http.Redirect(w, r, "/", http.StatusSeeOther)
+    return
+  }
 
+  r.ParseForm()
+
+  form := Form{
+    Title: r.FormValue("title"),
+  }
+
+  db.Create(&form)
+
+
+}
