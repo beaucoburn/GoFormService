@@ -127,4 +127,20 @@ func viewFormHandler(w http.ResponseWriter, r *http.Request){
   templates.ExecuteTemplate(w, "view.html", form)
 }
 
+func submitFormHandler(w http.ResponseWriter, r *http.Request){
+  if r.Method != http.MethodPost {
+    http.Redirect(w, r, "/", http.StatusSeeOther)
+    return
+  }
 
+  id := r.URL.Path[len("/forms/submit/"):]
+  var form Form
+  db.First(&form, id)
+
+  submission := FormSubmission{
+    FormID: form.ID,
+  }
+  db.Create(&submission)
+
+
+}
