@@ -84,3 +84,8 @@ func listFormsHandler(w http.ResponseWriter, r *http.Request){
   templates.ExecuteTemplate(w, "list.html", forms)
 }
 
+func newFormHandler(w http.ResponseWriter, r *http.Request){
+  templates.ExecuteTemplate(w, "new.html", nil)
+}
+
+
