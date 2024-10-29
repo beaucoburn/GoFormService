@@ -77,4 +77,10 @@ func main() {
   log.Fatal(http.ListenAndServe(":8080", nil))
 }
 
+//Handlers
+func listFormsHandler(w http.ResponseWriter, r *http.Request){
+  var forms []Form
+  db.Find(&forms)
+  templates.ExecuteTemplate(w, "list.html", forms)
+}
 
