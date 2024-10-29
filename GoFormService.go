@@ -16,3 +16,13 @@ type Form struct {
   Fields []FormField
   Submissions []FormSubmission
 }
+
+// FormField represents a field in a form
+type FormField struct {
+  gorm.Model
+  FormID uint
+  Label string
+  FieldType string // text, textarea, select, ect
+  Required bool
+  Options string // For select fields, comma-separated options
+}
