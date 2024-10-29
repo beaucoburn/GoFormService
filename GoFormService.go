@@ -26,3 +26,18 @@ type FormField struct {
   Required bool
   Options string // For select fields, comma-separated options
 }
+
+// FormSubmission represents a submitted form
+type FormSubmission struct {
+  gorm.Model
+  FormID uint
+  Values []FormFieldValue
+}
+
+// FormFieldValue represents a submitted field value
+type FormFieldValue struct {
+  gorm.Model
+  FormSubmissionID uint
+  FormFieldID uint
+  Value string
+}
