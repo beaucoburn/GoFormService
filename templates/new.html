@@ -35,3 +35,12 @@
   <button type="button" onclick="addField()">Add Field</button>
   <button type="submit">Create Form</button>
 </form>
+
+<script>
+  function addField() {
+    const template = document.querySelector('.field-template');
+    const clone = template.cloneNode(true);
+    document.getElementById('fields').appendChild(clone);
+  }
+</script>
+{{end}}
