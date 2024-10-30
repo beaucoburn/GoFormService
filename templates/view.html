@@ -1,0 +1,16 @@
+{{define "content"}}
+<h1>{{.Title}}</h1>
+<form action="/forms/submit/{{.ID}}" method="POST">
+  {{range .Fields}}
+  <div class="form-group">
+    <label>{{.Label}}</label>
+    {{if eq .FieldType "textarea"}}
+    <textarea name="{{.Label}}" {{if .Required}}required{{end}}></textarea>
+    {{else}}
+    <input type="{{.FieldType}}" name="{{.Label}}" {{if .Required}}required{{end}}>
+    {{end}}
+  </div>
+  {{end}}
+  <button type="submit">Submit</button>
+</form>
+{{end}}
