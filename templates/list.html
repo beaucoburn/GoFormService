@@ -1,0 +1,10 @@
+<h1>Forms</h1>
+<div class="forms-list">
+  {{ range .}}
+  <div class="form-item">
+    <h2>{{.Title}}</h2>
+    <a href="/forms/niew/{{.ID}}" class="button">View Form</a>
+  </div>
+  {{end}}
+</div>
+{{end}}
