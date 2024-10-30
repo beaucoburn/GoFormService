@@ -3,7 +3,7 @@
 <form action="/forms/create" method="POST">
   <div class="form-group">
     <label>Form Title</label>
-    <input type="text" name="title" required>
+    <input type="text" name="title" required />
   </div>
 
   <div id="fields">
@@ -11,7 +11,7 @@
     <div class="field-template">
       <div class="form-group">
         <label>Field Label</label>
-        <input type="text" name="field_label[]" required>
+        <input type="text" name="field_label[]" required />
       </div>
       <div class="form-group">
         <label>Field Type</label>
@@ -21,6 +21,17 @@
           <option value="number">Number</option>
           <option value="email">Email</option>
           <option value="date">Date</option>
-          </select>
+        </select>
       </div>
+      <div class="form-group">
+        <label>
+          <input type="checkbox" name="field_required[]" />
+          Required
+        </label>
+      </div>
+    </div>
+  </div>
 
+  <button type="button" onclick="addField()">Add Field</button>
+  <button type="submit">Create Form</button>
+</form>
